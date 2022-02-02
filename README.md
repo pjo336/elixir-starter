@@ -2,7 +2,7 @@
 A short guide running through how I configure my apps in elixir/phoenix when I first start them.
 
 #### Create App
-`mix phx.new <app-name> --app <app-name> --live --binary-id`
+`mix phx.new <app-name> --live --binary-id`
 
 #### Generate docker-compose to run postgres db
 ```
@@ -10,9 +10,9 @@ version: '3'
 
 services:
     database:
-        image: postgres:12
+        image: postgres:14
         ports:
-            - "5454:5432"
+            - "5453:5432"
         volumes:
             - ./postgresql/data:/var/lib/postgresql/data
         environment:
@@ -26,7 +26,7 @@ services:
 config :app_name, AppName.Repo,
   username: System.get_env("POSTGRES_USER", "postgres"),
   password: System.get_env("POSTGRES_PASSWORD", "postgres"),
-  port: System.get_env("POSTGRES_PORT", "5454"),
+  port: System.get_env("POSTGRES_PORT", "5453"),
   hostname: System.get_env("DATABASE_HOST", "localhost"),
   database: "<app-name>_dev",
   show_sensitive_data_on_connection_error: true,
@@ -37,19 +37,14 @@ config :app_name, AppName.Repo,
 config :app_name, AppName.Repo,
   username: System.get_env("POSTGRES_USER", "postgres"),
   password: System.get_env("POSTGRES_PASSWORD", "postgres"),
-  port: System.get_env("POSTGRES_PORT", "5454"),
+  port: System.get_env("POSTGRES_PORT", "5453"),
   hostname: System.get_env("DATABASE_HOST", "localhost"),
   database: "<app-name>_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox
 ```
 
 #### Setup Auth
-- Add to deps:
-
-    `{:phx_gen_auth, "~> 0.7", only: [:dev], runtime: false},`
-- Install:
-
-    `mix do deps.get, deps.compile`
+Auth is now built into phoenix 1.6
 - Run command:
 
     `mix phx.gen.auth Identity UserIndentity user_identities --binary-id`
@@ -62,7 +57,7 @@ config :app_name, AppName.Repo,
     
 #### Add libraries for testing
 ##### excoveralls
-    {:excoveralls, "~> 0.13", only: :test}
+    {:excoveralls, "~> 0.14", only: :test}
     add to project block in mix.exs
     ```
         test_coverage: [tool: ExCoveralls],
