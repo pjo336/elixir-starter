@@ -5,7 +5,7 @@ defmodule MyApp.MixProject do
     [
       app: :myapp,
       version: "0.1.0",
-      elixir: "~> 1.12",
+      elixir: "~> 1.13",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -40,28 +40,28 @@ defmodule MyApp.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:bcrypt_elixir, "~> 2.0"},
-      {:phoenix, "~> 1.6.6"},
+      {:bcrypt_elixir, "~> 3.0"},
+      {:phoenix, "~> 1.6.7"},
       {:phoenix_ecto, "~> 4.4"},
-      {:ecto_sql, "~> 3.6"},
+      {:ecto_sql, "~> 3.8"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 0.17.5"},
-      {:floki, ">= 0.30.0", only: :test},
+      {:phoenix_live_view, "~> 0.17"},
+      {:floki, ">= 0.32.0", only: :test},
       {:phoenix_live_dashboard, "~> 0.6"},
-      {:esbuild, "~> 0.3", runtime: Mix.env() == :dev},
-      {:swoosh, "~> 1.3"},
+      {:esbuild, "~> 0.4", runtime: Mix.env() == :dev},
+      {:swoosh, "~> 1.6"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
-      {:gettext, "~> 0.18"},
-      {:jason, "~> 1.2"},
+      {:gettext, "~> 0.19"},
+      {:jason, "~> 1.3"},
       {:plug_cowboy, "~> 2.5"},
       {:timex, "~> 3.7"},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
-      {:excoveralls, "~> 0.10", only: :test},
+      {:excoveralls, "~> 0.14", only: :test},
       {:ex_machina, "~> 2.7.0", only: :test},
-      {:mix_test_watch, "~> 1.0", only: :dev, runtime: false}
+      {:mix_test_watch, "~> 1.1", only: :dev, runtime: false}
     ]
   end
 
